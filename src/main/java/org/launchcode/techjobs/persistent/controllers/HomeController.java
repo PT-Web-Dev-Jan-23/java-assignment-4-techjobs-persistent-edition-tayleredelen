@@ -61,17 +61,18 @@ public class HomeController {
                                        Errors errors, Model model, @RequestParam int employerId, @RequestParam List<Integer> skills) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
-            model.addAttribute(new Job());
             model.addAttribute("employers", employerRepository.findAll());
             model.addAttribute("skills", skillRepository.findAll());
+            model.addAttribute(new Job());
             return "add"; //if validation errors submit in form returns to add view
         }
-//        Employer employer = employerRepository.findById(employerId).orElse(null);
-        newJob.setEmployer(employerRepository.findById(employerId).orElse(null));
-        newJob.setSkills(String.valueOf(skills));
+        //I need to use employerRepository.findById(employerId) to pull up employer user picks
+        //I also need to use newJob.setEmployer() to set the employer with this data ^
+        //BUT HOW!? :(
         jobRepository.save(newJob);
         return "redirect:";
     }
+
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
