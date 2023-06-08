@@ -28,10 +28,10 @@ public class HomeController {
     EmployerRepository employerRepository;
 
     @Autowired
-    JobRepository jobRepository;
+    SkillRepository skillRepository;
 
     @Autowired
-    SkillRepository skillRepository;
+    JobRepository jobRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -47,7 +47,8 @@ public class HomeController {
     public String displayAddJobForm(Model model) {
         model.addAttribute("title", "Add Job");
         model.addAttribute("job", new Job());
-        model.addAttribute("employer", employerRepository);
+        model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "add";
     }
 
@@ -66,9 +67,12 @@ public class HomeController {
             model.addAttribute(new Job());
             return "add"; //if validation errors submit in form returns to add view
         }
-        //I need to use employerRepository.findById(employerId) to pull up employer user picks
-        //I also need to use newJob.setEmployer() to set the employer with this data ^
-        //BUT HOW!? :(
+
+        Employer selectedEmployer = employerRepository.findById(employerId).get();
+        newJob.setEmployer(selectedEmployer);
+//        Skill selectedSkill = skillRepository.findById(employerId).get();
+//        newJob.setSkills(String.valueOf(selectedSkill));
+
         jobRepository.save(newJob);
         return "redirect:";
     }
