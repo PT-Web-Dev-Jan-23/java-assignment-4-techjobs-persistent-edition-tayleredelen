@@ -16,12 +16,17 @@ public class Job extends AbstractEntity{
     @ManyToOne
     private Employer employer;
 
-    private String skills;
+//    Update your Job model class to fit its many-to-many relationship with skills.
+//    Job.skills already exists. What needs to change and/or be added to map this relationship?
+//    Be sure to check the whole class for any necessary type updates. (update type to Skill)
+
+    @ManyToMany
+    private Skill skills;
 
     public Job() {
     }
 
-    public Job(Employer anEmployer, String someSkills) {
+    public Job(Employer anEmployer, Skill someSkills) {
         super();
         this.employer = anEmployer;
         this.skills = someSkills;
@@ -38,11 +43,11 @@ public class Job extends AbstractEntity{
         this.employer = employer;
     }
 
-    public String getSkills() {
+    public Skill getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(Skill skills) {
         this.skills = skills;
     }
 }
