@@ -71,9 +71,9 @@ public class HomeController {
         Employer selectedEmployer = employerRepository.findById(employerId).get();
         newJob.setEmployer(selectedEmployer);
         //To get the skills data from a list of ids (rather than a single id as we did with employer),
-        // use the CrudRepository method .findAllById(ids).
-        List<Skill> selectedSkill = (List<Skill>) skillRepository.findAllById(skills);
-        newJob.setSkills((Skill) selectedSkill);
+        // use the CrudRepository method .findAllById(ids)
+        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        newJob.setSkills((Skill) skillObjs);
 
         jobRepository.save(newJob);
         return "redirect:";
