@@ -1,6 +1,8 @@
 package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -21,12 +23,13 @@ public class Job extends AbstractEntity{
 //    Be sure to check the whole class for any necessary type updates. (update type to Skill)
 
     @ManyToMany
-    private Skill skills;
+//    private Skill skills;
+    private List<Skill> skills = new ArrayList<>();
 
     public Job() {
     }
 
-    public Job(Employer anEmployer, Skill someSkills) {
+    public Job(Employer anEmployer, List<Skill> someSkills) {
         super();
         this.employer = anEmployer;
         this.skills = someSkills;
@@ -43,11 +46,11 @@ public class Job extends AbstractEntity{
         this.employer = employer;
     }
 
-    public Skill getSkills() {
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Skill skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
 }
