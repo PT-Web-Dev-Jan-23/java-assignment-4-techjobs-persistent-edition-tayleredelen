@@ -23,7 +23,6 @@ public class Job extends AbstractEntity{
 //    Be sure to check the whole class for any necessary type updates. (update type to Skill)
 
     @ManyToMany
-//    private Skill skills;
     private List<Skill> skills = new ArrayList<>();
 
     public Job() {
